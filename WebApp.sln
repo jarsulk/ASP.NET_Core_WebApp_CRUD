@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppMvc", "WebAppMvc\WebAppMvc.csproj", "{3CBDFAD5-84F9-4A97-B038-36BECBE80556}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppRazor", "WebAppRazor\WebAppRazor.csproj", "{6CF1311F-2BF3-4FAA-A414-8589C9885201}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CBDFAD5-84F9-4A97-B038-36BECBE80556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CBDFAD5-84F9-4A97-B038-36BECBE80556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CBDFAD5-84F9-4A97-B038-36BECBE80556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CBDFAD5-84F9-4A97-B038-36BECBE80556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF1311F-2BF3-4FAA-A414-8589C9885201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF1311F-2BF3-4FAA-A414-8589C9885201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF1311F-2BF3-4FAA-A414-8589C9885201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF1311F-2BF3-4FAA-A414-8589C9885201}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9FE74D1-5248-40E8-AA98-274530D8873E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,56 @@
+﻿@page "/pages/{id:long?}"
+@model IndexModel
+
+<table class="table table-sm table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Category</th>
+			<th>Supplier</th>
+			<th>Operations</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Product product in Model.Products)
+		{
+			<tr>
+				<td>@product.ProductId</td>
+				<td>@product.Name</td>
+				<td>@product.Price</td>
+				<td>@product.Category?.Name</td>
+				<td>@product.Supplier?.Name</td>
+				<td>
+					<a asp-page="Details" asp-route-id="@product.ProductId" class="btn btn-sm btn-info">Details</a>
+					<a asp-page="Edit" asp-route-id="@product.ProductId" class="btn btn-sm btn-warning">Edit</a>
+					<a asp-page="Delete" asp-route-id="@product.ProductId" class="btn btn-sm btn-danger">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<a asp-page="Create" class="btn btn-sm btn-primary">Create</a>
+
+@functions
+{
+	public class IndexModel : PageModel
+	{
+		private DataContext context;
+
+		public IndexModel(DataContext dbContext)
+		{
+			context = dbContext;
+		}
+
+		public IEnumerable<Product> Products { get; set; } = Enumerable.Empty<Product>();
+
+		public void OnGetAsync(long id = 1)
+		{
+			Products = context.Products.
+					Include(p => p.Category).
+					Include(p => p.Supplier);
+		}
+	}
+}
