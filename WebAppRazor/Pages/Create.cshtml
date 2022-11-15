@@ -11,7 +11,7 @@
 	{
 		public CreateModel(DataContext dbContext) : base(dbContext) { }
 
-		public void OnGetAsync()
+		public void OnGet()
 		{
 			Product product = TempData.ContainsKey("product") ?
 					JsonSerializer.Deserialize<Product>((TempData["product"] as string)!)! :
