@@ -44,8 +44,8 @@
 		public void OnGet([FromQuery(Name="Product")] Product product, string returnPage)
 		{
 			TempData["product"] = Serialize(product);
-			TempData["returnAction"] = ReturnPage == returnPage;
-			TempData["productId"] = ProductId == product.ProductId.ToString();
+			TempData["returnAction"] = ReturnPage = returnPage;
+			TempData["productId"] = ProductId = product.ProductId.ToString();
 		}
 
 		public async Task<IActionResult> OnPostAsync()
