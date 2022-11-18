@@ -56,5 +56,14 @@
 				Theme = "danger",
 			};
 		}
+
+		public static SupplierViewModel SupplierPageModel(string returnPage)
+		{
+			return new SupplierViewModel
+			{
+				ReturnPage = returnPage,
+				Supplier = new Supplier(),
+			};
+		}
 	}
 }

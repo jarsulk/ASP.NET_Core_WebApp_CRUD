@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using WebAppMvc.Models;
 
 namespace WebAppMvc.Controllers
@@ -36,12 +37,16 @@ namespace WebAppMvc.Controllers
 		[HttpGet]
 		public IActionResult Create()
 		{
-			return View("ProductEditor", ViewModelFactory.Create(new Product(), Categories, Suppliers));
+			Product product = TempData.ContainsKey("product") ?
+					JsonSerializer.Deserialize<Product>((TempData["product"] as string)!)! :
+					new Product();
+			return View("ProductEditor", ViewModelFactory.Create(product, Categories, Suppliers));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> Create([FromForm] Product product)
 		{
+			await CheckNewCategory(product);
 			if (ModelState.IsValid)
 			{
 				product.Category = default;
@@ -56,7 +61,9 @@ namespace WebAppMvc.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Edit(long id)
 		{
-			Product? product = await context.Products.FindAsync(id);
+			Product? product = TempData.ContainsKey("product") ?
+					JsonSerializer.Deserialize<Product>((TempData["product"] as string)!) :
+					await context.Products.FindAsync(id);
 			if (product != null)
 			{
 				ProductViewModel model = ViewModelFactory.Edit(product, Categories, Suppliers);
@@ -68,6 +75,7 @@ namespace WebAppMvc.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Edit([FromForm] Product product)
 		{
+			await CheckNewCategory(product);
 			if (ModelState.IsValid)
 			{
 				product.Category = default;
@@ -97,6 +105,49 @@ namespace WebAppMvc.Controllers
 			context.Products.Remove(product);
 			await context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
+		}
+
+		private async Task CheckNewCategory(Product product)
+		{
+			if (product.CategoryId == -1 && !string.IsNullOrEmpty(product.Category?.Name))
+			{
+				context.Categories.Add(product.Category);
+				await context.SaveChangesAsync();
+				product.CategoryId = product.Category.CategoryId;
+				ModelState.Clear();
+				TryValidateModel(product);
+			}
+		}
+
+		[HttpGet]
+		public IActionResult SupplierBreakOut([FromQuery(Name = "Product")] Product product,
+				string returnPage)
+		{
+			SupplierViewModel model = ViewModelFactory.SupplierPageModel(returnPage);
+			TempData["product"] = JsonSerializer.Serialize(product);
+			TempData["returnAction"] = returnPage;
+			TempData["productId"] = product.ProductId.ToString();
+			return View("SupplierBreakOut", model);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> SupplierBreakOut([FromForm] Supplier supplier)
+		{
+			if (ModelState.IsValid && supplier != null)
+			{
+				context.Suppliers.Add(supplier);
+				await context.SaveChangesAsync();
+				Product? product = (TempData == null || TempData["product"] == null) ? null :
+						JsonSerializer.Deserialize<Product>((TempData["product"] as string)!);
+				if (product != null)
+				{
+					product.SupplierId = supplier.SupplierId;
+					TempData["product"] = JsonSerializer.Serialize(product);
+					string? id = TempData["productId"] as string;
+					return RedirectToAction(TempData["returnAction"] as string, new { id = id });
+				}
+			}
+			return View();
 		}
 	}
 }
