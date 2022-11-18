@@ -1,4 +1,4 @@
-﻿namespace WebAppRazor.Models
+﻿namespace WebAppMvc.Models
 {
 	public static class ViewModelFactory
 	{

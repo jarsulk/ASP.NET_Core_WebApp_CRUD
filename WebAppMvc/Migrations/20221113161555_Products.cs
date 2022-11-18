@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace WebAppRazor.Migrations
+namespace WebAppMvc.Migrations
 {
 	public partial class Products : Migration
 	{

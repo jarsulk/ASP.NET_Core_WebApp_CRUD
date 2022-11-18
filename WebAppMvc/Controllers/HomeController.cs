@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAppRazor.Models;
+using WebAppMvc.Models;
 
-namespace WebAppRazor.Controllers
+namespace WebAppMvc.Controllers
 {
 	public class HomeController : Controller
 	{

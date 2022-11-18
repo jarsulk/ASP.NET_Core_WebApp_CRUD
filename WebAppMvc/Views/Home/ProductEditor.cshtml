@@ -32,8 +32,10 @@
 		</div>
 		<select class="form-control" asp-for="Product.CategoryId" asp-items="@(new SelectList(Model?.Categories, "CategoryId", "Name"))" disabled="@Model?.ReadOnly">
 			<option value="" disabled selected>Wybierz kategorię</option>
+			<option value="-1">Dodaj nową kategorię...</option>
 		</select>
 	</div>
+	<vc:category-editor />
 
 	<div class="form-group">
 		<label asp-for="Product.SupplierId"></label>

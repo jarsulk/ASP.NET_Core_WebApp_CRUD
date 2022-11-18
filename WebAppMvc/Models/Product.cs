@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WebAppRazor.Validation;
+using WebAppMvc.Validation;
 
-namespace WebAppRazor.Models
+namespace WebAppMvc.Models
 {
 	public class Product
 	{

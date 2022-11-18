@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebAppRazor.Validation
+namespace WebAppMvc.Validation
 {
 	public class PrimaryKeyAttribute : ValidationAttribute
 	{

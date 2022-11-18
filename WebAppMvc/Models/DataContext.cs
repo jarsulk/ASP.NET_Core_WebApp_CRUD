@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WebAppRazor.Models
+namespace WebAppMvc.Models
 {
 	public class DataContext : DbContext
 	{

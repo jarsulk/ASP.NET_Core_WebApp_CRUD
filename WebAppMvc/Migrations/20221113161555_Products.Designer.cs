@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAppRazor.Models;
+using WebAppMvc.Models;
 
 #nullable disable
 
-namespace WebAppRazor.Migrations
+namespace WebAppMvc.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20221113161555_Products")]
